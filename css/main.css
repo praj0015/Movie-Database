@@ -1,0 +1,29 @@
+main{
+    text-align: center;
+/*    background-color: aqua;*/
+/*
+    width: 90%;
+    height: 85%;
+*/
+/*    z-index: 100px;*/
+    position: fixed;
+    margin: 1rem;
+    padding: 2rem;
+}
+
+header{
+    text-align: center;
+/*
+    width: 400px;
+    height: 200px;
+*/
+    top:calc((100%-200px)/2);
+    left: calc((100%-400px)/2);
+}
+#search-input:hover{
+    width: 200px;
+    height: 20px;
+}
+.modal{
+    z-index: 200px;
+}

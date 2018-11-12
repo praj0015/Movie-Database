@@ -10,8 +10,8 @@
     <main>
         <header >
             <img id="back-button" alt="Back Button" title="Back"/>
-            <img id="search-button" alt="Search" title="Search"/>
             <input type="text" id="search-input" placeholder="search" />
+            <img id="search-button" alt="Search" title="Search"/>
         </header>
         
         <div class="page" id="search-results">
@@ -26,8 +26,24 @@
     </main>
  
     
-    <div class="attribution">
-       
+    <div class="modal off">
+        <div class="modal-header">
+            <h2>
+                Preference
+            </h2>
+        </div>
+        <div class="modal-radio">
+                <input type="radio" name="TV" value="TV"
+                id="TV">
+                <label 
+                for="TV">TV</label>
+                
+                <input type="radio" name="TV" value="Movie" id="Movie">
+                <label for="Movie">Movie</label>
+        </div>
+        <button id="btnsave" value="Save">Save</button>
+        <button id="btncancel" value="Cancel">Cancel</button>
+        
     </div>
     
     <script src="js/iconic.min.js"></script>
