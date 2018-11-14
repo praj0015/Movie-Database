@@ -1,29 +1,78 @@
+
+/*
+.overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.8);
+    cursor: pointer;
+}
+*/
+
+.modal{
+    position: fixed;
+    width: 400px;
+    height: 280px;
+    z-index: 200px;
+    top: calc((100%-280px)/2);
+    left: calc((100%-400px)/2);
+    font-family: sans-serif;
+    line-height: 1.5;
+    color: red;
+    background-color: rgb(200,200,200); 
+}
+.off{
+    transform: translateY(-800px);
+}
+on{
+     transform: translateY(0);
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
 main{
     text-align: center;
-/*    background-color: aqua;*/
-/*
+    background-color: aqua;
     width: 90%;
     height: 85%;
-*/
-/*    z-index: 100px;*/
+    z-index: 100px;
     position: fixed;
     margin: 1rem;
     padding: 2rem;
-}
-
-header{
-    text-align: center;
-/*
-    width: 400px;
-    height: 200px;
-*/
-    top:calc((100%-200px)/2);
-    left: calc((100%-400px)/2);
 }
 #search-input:hover{
     width: 200px;
     height: 20px;
 }
-.modal{
-    z-index: 200px;
+.modal-header{
+    padding: 2px 16px;
+    background-color: chartreuse;
+    text-align: center;
 }
+.modal-radio{
+    text-align: center;
+    padding-top: 4rem;
+    font-size: 1.4rem;
+}
+.btnsave{
+    margin-top: 3.5rem;
+    margin-left: 1.5rem;
+    font-size: 1rem;
+    background-color: chartreuse;
+    width: 25%;
+    height: 10%;
+}
+.btncancel{
+    width: 25%;
+    height: 10%;
+    margin-left: 9rem;
+    font-size: 1rem;
+    background-color: chartreuse;
+}
+
