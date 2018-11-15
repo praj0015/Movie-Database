@@ -28,6 +28,11 @@ function addEventListeners() {
                 break;
             }
         }
+        let p = document.querySelector(".list");
+        p.innerHTML = "";
+        let h1 = document.createElement("h1");
+        h1.innerHTML = Showlist + " Reccomdations";
+        p.appendChild(h1);
         console.log(Showlist);
         hideoverlay(e);
     });
