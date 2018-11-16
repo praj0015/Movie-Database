@@ -85,7 +85,6 @@ function getPosterURLAndSizes() {
 
     let url = `${movieDataBaseURL}configuration?api_key=${APIKEY}`;
 
-    let img = document
 
     //fetch
 

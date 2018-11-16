@@ -1,16 +1,15 @@
-
-.overlay{
+.overlay {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     cursor: pointer;
 }
 
-.modal{
+.modal {
     position: fixed;
     width: 400px;
     height: 280px;
@@ -20,21 +19,44 @@
     font-family: sans-serif;
     line-height: 1.5;
     color: red;
-    background-color: rgb(200,200,200); 
+    background-color: rgb(200, 200, 200);
+/*
+    animation-name: modal;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+*/
 }
-.off{
+
+.off {
     transform: translateY(-800px);
 }
-.on{
-     transform: translateY(0);
+
+.on {
+    transform: translateY(0);
 }
-.hide{
+
+/*
+@keyframes modal {
+    0% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(800px);
+    }
+}
+*/
+.hide {
     display: none;
 }
-.show{
+
+.show {
     display: block;
 }
-main{
+
+main {
     text-align: center;
     background-color: aqua;
     width: 90%;
@@ -44,27 +66,34 @@ main{
     margin: 1rem;
     padding: 2rem;
 }
-#search-input{
-    width:400px;
-    height:40px; 
+header{
+    margin-top: 16rem;
+}
+#search-input {
+    width: 400px;
+    height: 40px;
     text-align: center;
     font-size: 1.5rem;
 }
-#search-input:hover{
+
+#search-input:hover {
     width: 600px;
     height: 40px;
 }
-.modal-header{
+
+.modal-header {
     padding: 2px 16px;
     background-color: chartreuse;
     text-align: center;
 }
-.modal-radio{
+
+.modal-radio {
     text-align: center;
     padding-top: 4rem;
     font-size: 1.4rem;
 }
-.btnsave{
+
+.btnsave {
     margin-top: 3.5rem;
     margin-left: 1.5rem;
     font-size: 1rem;
@@ -72,16 +101,17 @@ main{
     width: 25%;
     height: 10%;
 }
-.btncancel{
+
+.btncancel {
     width: 25%;
     height: 10%;
     margin-left: 9rem;
     font-size: 1rem;
     background-color: chartreuse;
 }
-h1{
+
+h1 {
     color: red;
     font-size: 4rem;
     text-align: center;
 }
-
