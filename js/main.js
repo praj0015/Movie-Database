@@ -4,6 +4,8 @@ const movieDataBaseURL = "https://api.themoviedb.org/3/";
 let imageURL = null;
 let imagesizes = [];
 
+let searchString = "";
+
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
@@ -14,7 +16,10 @@ function init() {
 
 function addEventListeners() {
 
-    document.querySelector(".search-button").addEventListener("click", showoverlay);
+    let searchButton = document.querySelector(".searchButtonDiv");
+    searchButton.addEventListener("click", startSearch);
+
+//    document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
 
     document.querySelector(".btncancel").addEventListener("click", hideoverlay);
 
@@ -104,4 +109,30 @@ function getPosterURLAndSizes() {
         .catch(function (error) {
             console.log(error);
         })
+}
+
+function startSearch() {
+
+    console.log("start search");
+    searchString = document.getElementById("search-input").value;
+    if (!searchString) {
+        alert("Please enter search data");
+        document.getElementById("search-input").focus;
+        return;
+    }
+
+    // this is a new search so you should reset any existing page data
+
+    getSearchResults();
+}
+
+function getSearchResults() {
+
+    let url = `${movieDataBaseURL}search/movie?api_key=${APIKEY}&query=${searchString}`;
+    fetch(url)
+        .then((response) => response.json())
+        .then(function (data) {
+            console.log(data);
+        })
+        .catch((error) => alert(error));
 }

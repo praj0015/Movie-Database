@@ -56,6 +56,17 @@
     display: block;
 }
 
+#search-button{
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer
+}
+
+.iconic-property-stroke,
+.iconic-property-fill {
+    fill: #345;
+    stroke: #269
+}
 main {
     text-align: center;
     background-color: aqua;
