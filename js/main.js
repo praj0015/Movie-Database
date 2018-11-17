@@ -16,15 +16,15 @@ function init() {
 
 function addEventListeners() {
 
-    let searchButton = document.querySelector(".searchButtonDiv");
+    let searchButton = document.querySelector("#magnify");
     searchButton.addEventListener("click", startSearch);
 
-//    document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
+    document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
 
     document.querySelector(".btncancel").addEventListener("click", hideoverlay);
 
     document.querySelector(".btnsave").addEventListener("click", function (e) {
-
+        console.logO("Television Reccomadation");
         let TVshow = document.getElementsByName("show");
         let Showlist = null;
         for (let i = 0; i < TVshow.length; i++) {
