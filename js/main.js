@@ -16,7 +16,7 @@ function init() {
 
 function addEventListeners() {
 
-    let searchButton = document.querySelector("#magnify");
+    let searchButton = document.querySelector(".magnifyDiv");
     searchButton.addEventListener("click", startSearch);
 
     document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
@@ -24,7 +24,6 @@ function addEventListeners() {
     document.querySelector(".btncancel").addEventListener("click", hideoverlay);
 
     document.querySelector(".btnsave").addEventListener("click", function (e) {
-        console.logO("Television Reccomadation");
         let TVshow = document.getElementsByName("show");
         let Showlist = null;
         for (let i = 0; i < TVshow.length; i++) {
@@ -120,7 +119,7 @@ function startSearch() {
         document.getElementById("search-input").focus;
         return;
     }
-
+    
     // this is a new search so you should reset any existing page data
 
     getSearchResults();

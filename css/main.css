@@ -95,6 +95,7 @@ header{
     margin-left: -5rem;
     margin-top: 0.2rem;
     position: relative;
+    cursor: pointer;
 }
 .modal-header {
     padding: 2px 16px;
