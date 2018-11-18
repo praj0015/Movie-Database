@@ -20,13 +20,6 @@
     line-height: 1.5;
     color: red;
     background-color: rgb(200, 200, 200);
-/*
-    animation-name: modal;
-    animation-delay: 1s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-timing-function: ease-in-out;
-*/
 }
 
 .off {
@@ -89,6 +82,7 @@ header{
     text-align: center;
     font-size: 1.5rem;
     margin-right: 1rem;
+    transition: width 1s;
 }
 
 #search-input:hover {
@@ -107,7 +101,6 @@ header{
     background-color: chartreuse;
     text-align: center;
 }
-
 .modal-radio {
     text-align: center;
     padding-top: 4rem;
