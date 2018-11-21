@@ -112,14 +112,14 @@ function getPosterURLAndSizes() {
 
 function startSearch() {
 
-    console.log("start search");
+    //  console.log("start search");
     searchString = document.getElementById("search-input").value;
     if (!searchString) {
         alert("Please enter search data");
         document.getElementById("search-input").focus;
         return;
     }
-    
+
     // this is a new search so you should reset any existing page data
 
     getSearchResults();
@@ -132,6 +132,21 @@ function getSearchResults() {
         .then((response) => response.json())
         .then(function (data) {
             console.log(data);
+            data = data.results;
+            console.log(data);
+            for (let i = 0; i < 20; i++) {
+                let image=data[i].poster_path;
+                console.log(image);
+                let title = data[i].original_title;
+                console.log(title);
+                let releaseDate = data[i].release_date;
+                console.log(releaseDate);
+                let vote = data[i].vote_average;
+                console.log(vote);
+                let overview=data[i].overview;
+                console.log(overview);
+            }
+            
         })
         .catch((error) => alert(error));
 }
