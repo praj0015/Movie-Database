@@ -147,11 +147,13 @@ function startSearch() {
                     let OriTitle = document.createElement("p");
                     let release_Date=document.createElement("p");
                     let review=document.createElement("p");
+                    let Overview_new=document.createElement("p");
                     images.src=`https://image.tmdb.org/t/p/w185${image}`;
 
                     OriTitle.innerHTML = title;
                     release_Date.innerHTML=releaseDate;
                     review.innerHTML=vote;
+                    Overview_new.innerHTML=overview;
                     
                     movieCard.className="movieCard";
                     section.className="ImageSection";
@@ -161,6 +163,7 @@ function startSearch() {
                     movieCard.appendChild(section);
                     movieCard.appendChild(release_Date);
                     movieCard.appendChild(review);
+                    movieCard.appendChild(Overview_new);
                     
                     main.appendChild(movieCard);
                 }
