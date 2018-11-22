@@ -149,20 +149,20 @@ function startSearch() {
                     let movieCard = document.createElement("div");
                     let section = document.createElement("section");
                     let images = document.createElement("img");
-                    let OriTitle = document.createElement("p");
-                    let release_Date = document.createElement("p");
+                    let OriTitle = document.createElement("h3");
+                    let release_Date = document.createElement("h4");
                     let review = document.createElement("p");
                     let Overview_new = document.createElement("p");
                     images.src = `https://image.tmdb.org/t/p/w185${image}`;
 
-                    OriTitle.innerHTML = title;
-                    release_Date.innerHTML = releaseDate;
-                    review.innerHTML = vote;
-                    Overview_new.innerHTML = overview;
+                    OriTitle.innerHTML = "Title : " + title;
+                    release_Date.innerHTML = "Release Date : " + releaseDate;
+                    review.innerHTML = "Review : " + vote;
+                    Overview_new.innerHTML = "Overview : " + overview;
 
                     movieCard.className = "movieCard";
                     section.className = "ImageSection";
-                    // OriTitle.className="p1";
+                    review.className = "p1";
                     //                    release_Date.className="p2";
 
 
@@ -186,22 +186,9 @@ function startSearch() {
 
 }
 
-//function getSearchResults(data) {
-//
-//    let documentFragment = new DocumentFragment();
-//    let movieCard = document.createElement("div");
-//    let section = document.createElement("section");
-//    let title = document.createElement("p");
-//    let releaseDate = document.createElement("p");
-//    let review = document.createElement("p");
-//    let overview = document.createElement("p");
-//
-//
-//}
-
 function getReccomendation(data) {
 
-   
+
     //  let url = `${movieDataBaseURL}search/movie/data.id/api_key=${APIKEY}`;
     //  https://api.themoviedb.org/3/movie/{movie_id}/recommendations?api_key=<<api_key>>
 

@@ -50,59 +50,32 @@
     background-color: cornflowerblue;
     display: grid;
     grid-template-columns: 1fr 3fr;
-    grid-template-areas: "a b";
-    margin: 4rem;
+    grid-template-areas: "a b"
+                         "a c"
+                         "a d"
+                         "a e";
+    margin: 3rem;
+    padding: 2rem;
 }
 .movieCard:hover{
     transform: scale(1.05);
 }
 .ImageSection {
     grid-area: a;
+    background-size: cover;
+}
+.movieCard > h3 {
+    grid-area: b;
+}
+.movieCard > h4 {
+    grid-area: c;
+}
+.movieCard > .p1 {
+    grid-area: d;
 }
 .movieCard > p {
-    grid-area: b;
-    /* overflow: hidden; */
-    overflow: inherit;
+    grid-area: e;
 }
-/*
-section.content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-.movieCard{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "a b";
-}
-.movieCard  .ImageSection{
-    grid-area: a;
-}
-.movieCard  h1,h2,h4,p{
-    grid-area: b;
-    overflow: hidden;
-}
-*/
-/*
-
-.movieCard {
-    width: 50rem;
-    height: auto;
-    margin: 1rem auto;
-    background-color: cornflowerblue;
-    color: white;
-}
-.ImageSection{
-    float: left;
-    width: 12rem;
-    height: 17rem;
-    margin-right: 1rem
-    overflow: hidden;
-}
-.imageSection > img {
-    height: 17rem;
-    margin-right: 1rem;
-}
-*/
 
 .searchButtonDiv{
     height: 3rem;
@@ -138,7 +111,11 @@ header{
     margin-right: 1rem;
     transition: width 1s;
 }
-
+#back-button{
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
 #search-input:hover {
     width: 600px;
     height: 40px;
