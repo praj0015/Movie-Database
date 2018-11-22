@@ -29,24 +29,67 @@
 .on {
     transform: translateY(0);
 }
-
-/*
-@keyframes modal {
-    0% {
-        transform: translateY(0px);
-    }
-
-    100% {
-        transform: translateY(800px);
-    }
-}
-*/
 .hide {
     display: none;
 }
 
 .show {
     display: block;
+}
+.page{
+    display: none;
+}
+.active{
+    display: block;
+}
+.flex.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.movieCard {
+    background-color: cornflowerblue;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: "a b";
+    margin: 4rem;
+}
+.movieCard:hover{
+    transform: scale(1.05);
+}
+.ImageSection {
+    grid-area: a;
+}
+.movieCard > p {
+    grid-area: b;
+    /* overflow: hidden; */
+    overflow: inherit;
+}
+/*
+section.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.movieCard{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "a b";
+}
+.movieCard  .ImageSection{
+    grid-area: a;
+}
+.movieCard  h1,h2,h4,p{
+    grid-area: b;
+    overflow: hidden;
+}
+*/
+/*
+
+.movieCard {
+    width: 50rem;
+    height: auto;
+    margin: 1rem auto;
+    background-color: cornflowerblue;
+    color: white;
 }
 .ImageSection{
     float: left;
@@ -55,7 +98,13 @@
     margin-right: 1rem
     overflow: hidden;
 }
-#search-button{
+.imageSection > img {
+    height: 17rem;
+    margin-right: 1rem;
+}
+*/
+
+.searchButtonDiv{
     height: 3rem;
     width: 3rem;
     cursor: pointer
@@ -135,3 +184,4 @@ h1 {
     font-size: 4rem;
     text-align: center;
 }
+
