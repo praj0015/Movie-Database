@@ -82,6 +82,18 @@ function hidemodal(e) {
 
 function getDataFromLocalStorage() {
     // Check if secure base url and sizes array are saved in Local Storage, if not call getPosterURLAndSIzes()
+    
+    
+    
+//     localStorage.setItem(nameKey, JSON.stringify(name.value));
+//    localStorage.setItem(numberKey, JSON.stringify(number.value));
+//
+//    let now = new Date();
+//    console.log("Date now type is " + typeof now);
+//
+//    localStorage.setItem(dateKey, JSON.stringify(now)); // JSON.stringify() uses Date.toISOString() behind the scenes!!
+//
+//    console.log("Name and Number Data saved to Local Storage");
 
     // If in local Storage check if saved over 60 minutes ago, if true call getPosterURLAndSizes
 
@@ -107,6 +119,7 @@ function getPosterURLAndSizes() {
 
             imageURL = data.images.secure_base_url;
             imagesizes = data.images.poster_sizes;
+            
 
             console.log(imageURL);
             console.log(imagesizes);
