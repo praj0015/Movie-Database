@@ -48,7 +48,13 @@
 .show {
     display: block;
 }
-
+.ImageSection{
+    float: left;
+    width: 12rem;
+    height: 17rem;
+    margin-right: 1rem
+    overflow: hidden;
+}
 #search-button{
     height: 3rem;
     width: 3rem;
@@ -60,16 +66,15 @@
     fill: #345;
     stroke: #269
 }
+
 main {
     text-align: center;
     background-color: aqua;
-    width: 90%;
-    height: 85%;
     z-index: 100px;
-    position: fixed;
     margin: 1rem;
     padding: 2rem;
 }
+
 header{
     display: flex;
     flex-direction: row;

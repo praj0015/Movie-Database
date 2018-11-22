@@ -16,6 +16,7 @@ function init() {
 
 function addEventListeners() {
 
+
     let searchButton = document.querySelector(".magnifyDiv");
     searchButton.addEventListener("click", startSearch);
 
@@ -118,35 +119,97 @@ function startSearch() {
         alert("Please enter search data");
         document.getElementById("search-input").focus;
         return;
+    } else {
+
+        let url = `${movieDataBaseURL}search/movie?api_key=${APIKEY}&query=${searchString}`;
+        fetch(url)
+            .then((response) => response.json())
+            .then(function (data) {
+                console.log(data);
+                data = data.results;
+                console.log(data);
+                for (let i = 0; i < 20; i++) {
+                    let image = data[i].poster_path;
+                    console.log(image);
+                    let title = data[i].original_title;
+                    console.log(title);
+                    let releaseDate = data[i].release_date;
+                    console.log(releaseDate);
+                    let vote = data[i].vote_average;
+                    console.log(vote);
+                    let overview = data[i].overview;
+                    console.log(overview);
+                    
+                    let main = document.querySelector("#search-results>.content");
+                    let movieCard=document.createElement("div");
+                    let section=document.createElement("section");
+                    let images=document.createElement("img");   
+                    let OriTitle = document.createElement("p");
+                    let release_Date=document.createElement("p");
+                    let review=document.createElement("p");
+                    images.src=`https://image.tmdb.org/t/p/w185${image}`;
+
+                    OriTitle.innerHTML = title;
+                    release_Date.innerHTML=releaseDate;
+                    review.innerHTML=vote;
+                    
+                    movieCard.className="movieCard";
+                    section.className="ImageSection";
+                    
+                    movieCard.appendChild(OriTitle);
+                    section.appendChild(images);
+                    movieCard.appendChild(section);
+                    movieCard.appendChild(release_Date);
+                    movieCard.appendChild(review);
+                    
+                    main.appendChild(movieCard);
+                }
+//                let content = document.querySelector("#search-results>.content");
+//                let cards = [];
+//
+//
+//                cards.forEach(function (item) {
+//                    item.push(getSearchResults(data));
+//                });
+//                console.log(cards);
+//
+//                let documentFragment = new DocumentFragment();
+//
+//                cards.forEach(function (item) {
+//                    documentFragment.appendChild(item);
+//                });
+//                content.appendChild(documentFragment);
+//
+//                let cardList = document.querySelectorAll(".content>div");
+//
+//                cardList.forEach(function (item) {
+//                    item.addEventListener("click", getReccomendation);
+//                });
+                //getSearchResults(data);
+            
+
+            })
+            .catch((error) => alert(error));
+        // this is a new search so you should reset any existing page data
+
+        
     }
 
-    // this is a new search so you should reset any existing page data
-
-    getSearchResults();
 }
 
-function getSearchResults() {
+//function getSearchResults(data) {
+//
+//    let documentFragment = new DocumentFragment();
+//    let movieCard = document.createElement("div");
+//    let section = document.createElement("section");
+//    let title = document.createElement("p");
+//    let releaseDate = document.createElement("p");
+//    let review = document.createElement("p");
+//    let overview = document.createElement("p");
+//
+//
+//}
 
-    let url = `${movieDataBaseURL}search/movie?api_key=${APIKEY}&query=${searchString}`;
-    fetch(url)
-        .then((response) => response.json())
-        .then(function (data) {
-            console.log(data);
-            data = data.results;
-            console.log(data);
-            for (let i = 0; i < 20; i++) {
-                let image=data[i].poster_path;
-                console.log(image);
-                let title = data[i].original_title;
-                console.log(title);
-                let releaseDate = data[i].release_date;
-                console.log(releaseDate);
-                let vote = data[i].vote_average;
-                console.log(vote);
-                let overview=data[i].overview;
-                console.log(overview);
-            }
-            
-        })
-        .catch((error) => alert(error));
+function getReccomendation() {
+
 }
