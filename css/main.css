@@ -1,3 +1,8 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -29,6 +34,7 @@
 .on {
     transform: translateY(0);
 }
+
 .hide {
     display: none;
 }
@@ -36,48 +42,34 @@
 .show {
     display: block;
 }
-.page{
-    display: none;
-}
-.active{
-    display: block;
-}
-.flex.container{
+
+.flex.container {
     display: flex;
     flex-wrap: wrap;
 }
+
 .movieCard {
+    width: 50rem;
+    height: auto;
+    margin: 1rem auto;
     background-color: cornflowerblue;
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-template-areas: "a b"
-                         "a c"
-                         "a d"
-                         "a e";
-    margin: 3rem;
-    padding: 2rem;
+    color: white;
 }
-.movieCard:hover{
-    transform: scale(1.05);
-}
-.ImageSection {
-    grid-area: a;
-    background-size: cover;
-}
-.movieCard > h3 {
-    grid-area: b;
-}
-.movieCard > h4 {
-    grid-area: c;
-}
-.movieCard > .p1 {
-    grid-area: d;
-}
-.movieCard > p {
-    grid-area: e;
+.imageSection {
+    float: left;
+    width: 12rem;
+    height: 17rem;
+    margin-right: 1rem;
+    overflow: hidden;
 }
 
-.searchButtonDiv{
+/*select only the images that are direct descendants of .imageSection*/
+.imageSection > img {
+    height: 17rem;
+    margin-right: 1rem;
+}
+
+.searchButtonDiv {
     height: 3rem;
     width: 3rem;
     cursor: pointer
@@ -97,12 +89,13 @@ main {
     padding: 2rem;
 }
 
-header{
+header {
     display: flex;
     flex-direction: row;
     margin-top: 16rem;
     justify-content: center;
 }
+
 #search-input {
     width: 400px;
     height: 40px;
@@ -111,16 +104,19 @@ header{
     margin-right: 1rem;
     transition: width 1s;
 }
-#back-button{
+
+#back-button {
     width: 3rem;
-    height: 3rem; 
+    height: 3rem;
     cursor: pointer;
 }
+
 #search-input:hover {
     width: 600px;
     height: 40px;
 }
-#magnify{
+
+#magnify {
     width: 2.8rem;
     height: 2.5rem;
     margin-left: -5rem;
@@ -128,11 +124,13 @@ header{
     position: relative;
     cursor: pointer;
 }
+
 .modal-header {
     padding: 2px 16px;
     background-color: chartreuse;
     text-align: center;
 }
+
 .modal-radio {
     text-align: center;
     padding-top: 4rem;
@@ -161,4 +159,3 @@ h1 {
     font-size: 4rem;
     text-align: center;
 }
-
