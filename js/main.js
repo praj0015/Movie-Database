@@ -7,10 +7,11 @@ let imagesizes = [];
 let searchString = "";
 
 let pages = [];
-let imagesURL = "imageURKey";
-let imagesize = "imageSizeKey";
+let imageURLKey = "imageURL";
+let imageSizeKey = "imageSize";
 let timeKey = "timeKey";
 let mode = "modeKey";
+let TVmode = "TVmodeKey";
 let staleDataTimeOut = "3600";
 let modes = null;
 
@@ -23,6 +24,7 @@ function init() {
     // console.log(APIKEY);
     addEventListeners();
     getDataFromLocalStorage();
+    getPosterURLAndSizes();
 }
 
 function addEventListeners() {
@@ -35,6 +37,7 @@ function addEventListeners() {
 
     document.querySelector(".btncancel").addEventListener("click", hideoverlay);
 
+    document.querySelector(".Backbutton").addEventListener("click", PageBack);
     document.querySelector(".btnsave").addEventListener("click", function (e) {
         let TVshow = document.getElementsByName("show");
         let Showlist = null;
@@ -47,7 +50,8 @@ function addEventListeners() {
         let p = document.querySelector(".list");
         p.innerHTML = "";
         let h1 = document.createElement("h1");
-        h1.innerHTML = Showlist + " Reccomdations";
+        h1.innerHTML = Showlist + " Reccomdation";
+        h1.style.fontFamily = "serif";
         p.appendChild(h1);
         console.log(Showlist);
         hideoverlay(e);
@@ -89,6 +93,19 @@ function hidemodal(e) {
 function getDataFromLocalStorage() {
     // Check if secure base url and sizes array are saved in Local Storage, if not call getPosterURLAndSIzes()
 
+    if (localStorage.getItem(imageURLKey) && localStorage.getItem(imageSizeKey)) {
+        console.log("Data retrieved from local Storage");
+        imageURL = localStorage.getItem(imageURLKey);
+        imagesizes = localStorage.getItem(imageSizeKey);
+
+        console.log(imageURL.value);
+        console.log(imagesizes);
+    } else {
+        console.log("Data is not saved on local Storage");
+    }
+
+    //in save in localstorage and < 60 minutes old, load and use from local storage
+
     // If in local Storage check if saved over 60 minutes ago, if true call getPosterURLAndSizes
     if (localStorage.getItem(timeKey)) {
         console.log("Retrieved saved store date from local Storage");
@@ -101,24 +118,12 @@ function getDataFromLocalStorage() {
         if (seconds > staleDataTimeOut) {
             console.log("Local Storage Data is stale");
             saveDateToLocalStorage();
+            getPosterURLAndSizes();
         }
     } else {
         getPosterURLAndSizes();
     }
-
-
 }
-
-function saveDateToLocalStorage() {
-
-    console.log("Saving current Date to Local Storage");
-    let now = new Date();
-    localStorage.setItem(timeKey, now);
-}
-
-//in save in localstorage and < 60 minutes old, load and use from local storage
-
-
 
 function getPosterURLAndSizes() {
     //https://api.themoviedb.org/3/configuration?api_key=<<api_key>>
@@ -134,16 +139,25 @@ function getPosterURLAndSizes() {
         })
         .then(function (data) {
             console.log(data);
-
             imageURL = data.images.secure_base_url;
             imagesizes = data.images.poster_sizes;
 
+            localStorage.setItem(imageURLKey, JSON.stringify(imageURL.value));
+            localStorage.setItem(imageSizeKey, JSON.stringify(imagesizes));
+            console.log("Data saved in local Storage");
             console.log(imageURL);
             console.log(imagesizes);
         })
         .catch(function (error) {
             console.log(error);
         })
+}
+
+function saveDateToLocalStorage() {
+
+    console.log("Saving current Date to Local Storage");
+    let now = new Date();
+    localStorage.setItem(timeKey, now);
 }
 
 function startSearch() {
@@ -213,7 +227,6 @@ function startSearch() {
 
             })
             .catch((error) => alert(error));
-        // this is a new search so you should reset any existing page data
 
     }
 
@@ -234,19 +247,20 @@ function createPages(data) {
         message.innerHTML = `Total ${data.total_results} results found for ${searchString}`;
     }
     console.log(message);
-   // title.appendChild(message);
+    title.appendChild(message);
     let documentFragment = new DocumentFragment();
     documentFragment.appendChild(createCards(data.results));
-    
-    content.appendChild(documentFragment);
+
+    // content.appendChild(documentFragment);
+    console.log(data.results);
 
 }
 
 function createCards(results) {
 
-    let documnetFragment = new DocumentFragment();
+    let documentFragment = new DocumentFragment();
 
-    results.forEach(function(movie) {
+    results.forEach(function (movie) {
 
         let movieCard = document.createElement("div");
         let section = document.createElement("section");
@@ -275,11 +289,12 @@ function createCards(results) {
         movieCard.appendChild(release_date);
         movieCard.appendChild(review);
         movieCard.appendChild(overview);
-        
-        documnetFragment.appendChild(movieCard);
+
+        documentFragment.appendChild(movieCard);
+        navigate(0);
     });
-    
-    return documnetFragment;
+
+    return documentFragment;
 }
 
 function getReccomendation(data) {
@@ -302,6 +317,9 @@ function calculateElapseTime(savedDate) {
     return seconds;
 }
 
+function PageBack() {
+    window.history.back();
+}
 let navigate = function (page) {
     for (let i = 0; i < pages.length; i++) {
         if (page == i) {
