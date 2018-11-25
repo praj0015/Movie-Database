@@ -33,6 +33,7 @@ function addEventListeners() {
     let searchButton = document.querySelector(".magnifyDiv");
     searchButton.addEventListener("click", startSearch);
 
+    document.querySelector("#search-input").addEventListener("onkeydown", startSearch);
     document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
 
     document.querySelector(".btncancel").addEventListener("click", hideoverlay);
@@ -159,10 +160,13 @@ function saveDateToLocalStorage() {
     let now = new Date();
     localStorage.setItem(timeKey, now);
 }
-
+ 
 function startSearch() {
 
-    //  console.log("start search");
+    console.log("start search");
+//    if (Event.keyCode == 'Enter') {
+//        console.log("Hi");
+//    }
     searchString = document.getElementById("search-input").value;
     if (!searchString) {
         alert("Please enter search data");
