@@ -34,8 +34,8 @@ function addEventListeners() {
     let searchButton = document.querySelector(".magnifyDiv");
     searchButton.addEventListener("click", startSearch);
 
-//    document.querySelector("#search-input").addEventListener("onkeydown", startSearch);
-//    document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
+    //    document.querySelector("#search-input").addEventListener("onkeydown", startSearch);
+    //    document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
 
     document.querySelector(".btncancel").addEventListener("click", hideoverlay);
 
@@ -170,10 +170,12 @@ function getDataFromLocalStorage() {
 
 
 function startSearch() {
-    
-    let header=document.querySelector("header");
-    header.style.transform="translateY(-270px)";
-    header.style.transition="transform 1s";
+
+    let search = document.getElementById("search-input");
+    search.style.width = "800px";
+    let main = document.querySelector("main");
+    main.style.transform = "translateY(-250px)";
+    main.style.transition = "transform 1s";
     console.log("start search");
     //    if (Event.keyCode == 'Enter') {
     //        console.log("Hi");
@@ -211,8 +213,10 @@ function createPages(data, pageid) {
     if (data.total_results == 0) {
         message.innerHTML = `No data Found ${searchString}`;
     } else {
-        message.innerHTML = `Total ${data.total_results} results found for ${searchString}`;
+        message.innerHTML = `Total ${data.total_results} results found for ${searchString} <br> Page include 1 to ${data.results.length}`;
     }
+    message.style.color = "red";
+    message.style.fontSize = "3rem";
     console.log(message);
     Title.appendChild(message);
     let documentFragment = new DocumentFragment();
@@ -300,7 +304,7 @@ function calculateElapseTime(savedDate) {
 }
 
 function PageBack() {
-    window.history.back();
+    window.history.back ;
 }
 let navigate = function (page) {
     for (let i = 0; i < pages.length; i++) {
