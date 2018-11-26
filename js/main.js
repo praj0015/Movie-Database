@@ -34,8 +34,9 @@ function addEventListeners() {
     let searchButton = document.querySelector(".magnifyDiv");
     searchButton.addEventListener("click", startSearch);
 
+
     //    document.querySelector("#search-input").addEventListener("onkeydown", startSearch);
-    //    document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
+    document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
 
     document.querySelector(".btncancel").addEventListener("click", hideoverlay);
 
@@ -180,6 +181,8 @@ function startSearch() {
     //    if (Event.keyCode == 'Enter') {
     //        console.log("Hi");
     //    }
+    modes = Showlist;
+    console.log(modes);
     searchString = document.getElementById("search-input").value;
     if (!searchString) {
         alert("Please enter search data");
@@ -204,7 +207,7 @@ function startSearch() {
 function createPages(data, pageid) {
     let content = document.querySelector(pageid + ">.content");
 
-    let Title = document.querySelector("#search-results>.title");
+    let Title = document.querySelector(pageid + ">.title");
 
     let message = document.createElement("h2");
     content.innerHTML = "";
@@ -212,12 +215,14 @@ function createPages(data, pageid) {
 
     if (data.total_results == 0) {
         message.innerHTML = `No data Found ${searchString}`;
-    } else {
+    }
+    if (pageid == "#search-results") {
         message.innerHTML = `Total ${data.total_results} results found for ${searchString} <br> Page include 1 to ${data.results.length}`;
+    } else if (pageid == "#recommend-results") {
+        message.innerHTML = `Recommendation results are below`;
     }
     message.style.color = "red";
     message.style.fontSize = "3rem";
-    console.log(message);
     Title.appendChild(message);
     let documentFragment = new DocumentFragment();
     documentFragment.appendChild(createCards(data.results));
@@ -276,15 +281,15 @@ function getReccomendation() {
 
     let movieTitle = this.getAttribute("data-title");
     let movieID = this.getAttribute("data-id");
-    console.log("you clicked " + movieTitle + " " + movieID);
     let url = `${movieDataBaseURL}movie/${movieID}/recommendations?api_key=${APIKEY}`;
-
+    searchString = movieTitle;
+    console.log(searchString);
     fetch(url)
         .then((response) => response.json())
         .then(function (data) {
             console.log(data);
 
-            createPages(data,"#recommend-results");
+            createPages(data, "#recommend-results");
 
         })
         .catch((error) => alert(error));
@@ -295,7 +300,6 @@ function calculateElapseTime(savedDate) {
     let now = new Date(); // get the current time
     console.log(now);
 
-    // calculate elapsed time
     let elapsedTime = now.getTime() - savedDate.getTime();
 
     let seconds = Math.ceil(elapsedTime / 1000);
@@ -304,7 +308,7 @@ function calculateElapseTime(savedDate) {
 }
 
 function PageBack() {
-    window.history.back ;
+    window.history.back;
 }
 let navigate = function (page) {
     for (let i = 0; i < pages.length; i++) {
