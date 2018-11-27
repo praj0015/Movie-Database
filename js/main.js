@@ -39,16 +39,6 @@ function addEventListeners() {
     //    document.querySelector("#search-input").addEventListener("onkeydown", startSearch);
     document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
 
-    //    document.querySelector(".magnifyDiv").addEventListener("click", function () {
-    //
-    //        pages[0].classList.toggle("active");
-    //        pages[1].classList.toggle("active");
-    //    });
-    //    document.querySelector(".movieCard").addEventListener("click", function () {
-    //
-    //        pages[0].classList.toggle("active");
-    //        pages[1].classList.toggle("active");
-    //    });
     document.querySelector(".btncancel").addEventListener("click", hideoverlay);
 
     document.querySelector(".Backbutton").addEventListener("click", PageBack);
