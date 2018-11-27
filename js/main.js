@@ -389,8 +389,8 @@ let praj0015 = (function () {
         });
         return documentFragment;
     }
-    function createTelevisionRecommendationCards(results)
-    {
+
+    function createTelevisionRecommendationCards(results) {
         let documentFragment = new DocumentFragment();
 
         results.forEach(function (TV) {
@@ -496,7 +496,7 @@ let praj0015 = (function () {
     }
 
     function getTelevisionRecommendation() {
-        
+
         let TVTitle = this.getAttribute("data-title");
         let TV_ID = this.getAttribute("data-id");
         let url = `${movieDataBaseURL}tv/${TV_ID}/recommendations?api_key=${APIKEY}`;
@@ -524,11 +524,24 @@ let praj0015 = (function () {
 
     function PageBack() {
 
-        if (navigate(1) == 'active') {
-            navigate(0).classList.add('active');
-            navigate(1).classList.remove('active');
-        } else if (navigate(0) == 'active') {
-            let homepage = document.querySelector("#search-results");
+        for (let i = 0; i < pages.length; i++) {
+            if (pages[i].classList.contains("active")) {
+                let cl = pages[i].id;
+                let active = document.getElementById(cl);
+                if (cl == "recommend-results") {
+                    active.classList.remove("active");
+                    document.querySelector("#search-results").classList.add("active");
+                } else if (cl == "search-results") {
+                    active.classList.remove("active");
+                    document.querySelector("#search-results").classList.remove("active");
+                    let search = document.getElementById("search-input");
+                    search.style.width = "800px";
+                    let main = document.querySelector("main");
+                    main.style.transform = "translateY(0)";
+                    main.style.transition = "transform 1s";
+                    document.getElementById("search-input").value = "";
+                }
+            }
         }
     }
     let navigate = function (page) {
