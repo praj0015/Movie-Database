@@ -70,6 +70,7 @@ p{
     line-height: 1.5;
     color: red;
     background-color: rgb(200, 200, 200);
+    transition: "transform 1s";
 }
 
 .off {
