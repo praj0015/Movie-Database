@@ -1,5 +1,5 @@
 /* globals APIKEY */
-let praj0015 = (function () {
+let MyAPI_Project = (function () {
 
     const movieDataBaseURL = "https://api.themoviedb.org/3/";
     let imageURL = null;
@@ -99,13 +99,6 @@ let praj0015 = (function () {
     }
 
 
-    function saveDateToLocalStorage() {
-
-        console.log("Saving current Date to Local Storage");
-        let now = new Date();
-        localStorage.setItem(timeKey, now);
-    }
-
     function getDataFromLocalStorage() {
         // Check if secure base url and sizes array are saved in Local Storage, if not call getPosterURLAndSIzes()
 
@@ -133,25 +126,44 @@ let praj0015 = (function () {
             p.appendChild(h1);
 
         }
-
         // If in local Storage check if saved over 60 minutes ago, if true call getPosterURLAndSizes
         if (localStorage.getItem(timeKey)) {
             console.log("Retrieved saved store date from local Storage");
             let savedDate = localStorage.getItem(timeKey);
             savedDate = new Date(savedDate);
-
             console.log(savedDate);
 
-            let seconds = calculateElapseTime(savedDate);
+            let seconds = calculateElapsedTime(savedDate);
             if (seconds > staleDataTimeOut) {
                 console.log("Local Storage Data is stale");
                 saveDateToLocalStorage();
                 getPosterURLAndSizes();
             }
         } else {
+            saveDateToLocalStorage()
             getPosterURLAndSizes();
         }
+
     }
+
+    function saveDateToLocalStorage() {
+        console.log("Saving current Date to Local Storage");
+        let now = new Date();
+        localStorage.setItem(timeKey, now);
+    }
+
+    function calculateElapsedTime(savedDate) {
+        let now = new Date(); // get the current time
+        console.log(now);
+
+        // calculate elapsed time
+        let elapsedTime = now.getTime() - savedDate.getTime(); // this in milliseconds
+
+        let seconds = Math.ceil(elapsedTime / 1000);
+        console.log("Elapsed Time: " + seconds + " seconds");
+        return seconds;
+    }
+
 
     function getPosterURLAndSizes() {
         //https://api.themoviedb.org/3/configuration?api_key=<<api_key>>
@@ -509,17 +521,6 @@ let praj0015 = (function () {
                 createTelevisionPages(data, "#recommend-results");
             })
             .catch((error) => alert(error));
-    }
-
-    function calculateElapseTime(savedDate) {
-        let now = new Date(); // get the current time
-        console.log(now);
-
-        let elapsedTime = now.getTime() - savedDate.getTime();
-
-        let seconds = Math.ceil(elapsedTime / 1000);
-        console.log("Elapsed Time: " + seconds + "seconds");
-        return seconds;
     }
 
     function PageBack() {

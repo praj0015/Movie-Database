@@ -9,8 +9,8 @@
     display: flex;
     flex-wrap: wrap;
 }
+
 .movieCard {
-    width: 60rem;
     height: auto;
     margin: 1rem auto;
     background-color: cornflowerblue;
@@ -18,32 +18,45 @@
     cursor: pointer;
     box-shadow: 2px 2px red;
 }
-.content>div{
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1rem;
+}
+
+.content > div {
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-areas: "a b"
-                         "a c"
-                         "a d"
-                         "a e";
+        "a c"
+        "a d"
+        "a e";
 }
-.imageSection{
+
+.imageSection {
     grid-area: a;
 }
-.content>div>h3{
+
+.content > div > h3 {
     grid-area: b;
     font-family: serif;
 }
-.content>div>h4{
+
+.content > div > h4 {
     grid-area: c;
 }
-.content>div>h5{
+
+.content > div > h5 {
     grid-area: d;
-    font-family: 'Source+Sans+Pro' sans-serif;
+    font-family: 'Source+Sans+Pro'sans-serif;
 }
-p{
+
+p {
     grid-area: e;
     font-family: sans-serif;
 }
+
 .movieCard:hover {
     transform: scale(1.05);
 }
@@ -112,14 +125,16 @@ p {
     fill: #345;
     stroke: #269
 }
-.title>h2{
+
+.title > h2 {
     font-family: serif;
 }
+
 main {
     text-align: center;
     background-color: aqua;
     z-index: 100px;
- 
+
     padding: 2rem;
 }
 
@@ -194,4 +209,11 @@ h1 {
     color: red;
     font-size: 4rem;
     text-align: center;
+}
+@media(max-width:1200px){
+    .content{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row-gap: 1rem;
+    }
 }
