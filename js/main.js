@@ -22,6 +22,7 @@ function init() {
 
     pages = document.querySelectorAll(".page");
     console.log(pages);
+
     // console.log(APIKEY);
     addEventListeners();
     getDataFromLocalStorage();
@@ -38,6 +39,16 @@ function addEventListeners() {
     //    document.querySelector("#search-input").addEventListener("onkeydown", startSearch);
     document.querySelector(".searchButtonDiv").addEventListener("click", showoverlay);
 
+    //    document.querySelector(".magnifyDiv").addEventListener("click", function () {
+    //
+    //        pages[0].classList.toggle("active");
+    //        pages[1].classList.toggle("active");
+    //    });
+    //    document.querySelector(".movieCard").addEventListener("click", function () {
+    //
+    //        pages[0].classList.toggle("active");
+    //        pages[1].classList.toggle("active");
+    //    });
     document.querySelector(".btncancel").addEventListener("click", hideoverlay);
 
     document.querySelector(".Backbutton").addEventListener("click", PageBack);
@@ -94,6 +105,52 @@ function hidemodal(e) {
     modal.classList.remove("on");
 }
 
+
+function saveDateToLocalStorage() {
+
+    console.log("Saving current Date to Local Storage");
+    let now = new Date();
+    localStorage.setItem(timeKey, now);
+}
+
+function getDataFromLocalStorage() {
+    // Check if secure base url and sizes array are saved in Local Storage, if not call getPosterURLAndSIzes()
+
+    //    if (localStorage.getItem(imageURLKey) && localStorage.getItem(imageSizeKey)) {
+    //        console.log("Data retrieved from local Storage");
+    //        imageURL = localStorage.getItem(modeKey);
+    //        imagesizes = localStorage.getItem(imageSizeKey);
+    //
+    //        console.log(imageURL);
+    //        console.log(imagesizes);
+    //    } else {
+    //        console.log("Data is not saved on local Storage");
+    //    }
+
+    if (localStorage.getItem(modeKey)) {
+        console.log("Mode Data Retrieved from local Storage");
+        Showlist = localStorage.getItem(modeKey);
+        console.log(Showlist.value);
+    }
+    // If in local Storage check if saved over 60 minutes ago, if true call getPosterURLAndSizes
+    if (localStorage.getItem(timeKey)) {
+        console.log("Retrieved saved store date from local Storage");
+        let savedDate = localStorage.getItem(timeKey);
+        savedDate = new Date(savedDate);
+
+        console.log(savedDate);
+
+        let seconds = calculateElapseTime(savedDate);
+        if (seconds > staleDataTimeOut) {
+            console.log("Local Storage Data is stale");
+            saveDateToLocalStorage();
+            getPosterURLAndSizes();
+        }
+    } else {
+        getPosterURLAndSizes();
+    }
+}
+
 function getPosterURLAndSizes() {
     //https://api.themoviedb.org/3/configuration?api_key=<<api_key>>
 
@@ -121,54 +178,6 @@ function getPosterURLAndSizes() {
             console.log(error);
         })
 }
-
-function saveDateToLocalStorage() {
-
-    console.log("Saving current Date to Local Storage");
-    let now = new Date();
-    localStorage.setItem(timeKey, now);
-}
-
-function getDataFromLocalStorage() {
-    // Check if secure base url and sizes array are saved in Local Storage, if not call getPosterURLAndSIzes()
-
-    if (localStorage.getItem(imageURLKey) && localStorage.getItem(imageSizeKey)) {
-        console.log("Data retrieved from local Storage");
-        imageURL = localStorage.getItem(modeKey);
-        imagesizes = localStorage.getItem(imageSizeKey);
-
-        console.log(imageURL);
-        console.log(imagesizes);
-    } else {
-        console.log("Data is not saved on local Storage");
-    }
-
-    if (localStorage.getItem(modeKey)) {
-        console.log("Mode Data Retrieved from local Storage");
-        Showlist = localStorage.getItem(modeKey);
-        console.log(Showlist.value);
-    }
-    //in save in localstorage and < 60 minutes old, load and use from local storage
-
-    // If in local Storage check if saved over 60 minutes ago, if true call getPosterURLAndSizes
-    if (localStorage.getItem(timeKey)) {
-        console.log("Retrieved saved store date from local Storage");
-        let savedDate = localStorage.getItem(timeKey);
-        savedDate = new Date(savedDate);
-
-        console.log(savedDate);
-
-        let seconds = calculateElapseTime(savedDate);
-        if (seconds > staleDataTimeOut) {
-            console.log("Local Storage Data is stale");
-            saveDateToLocalStorage();
-            getPosterURLAndSizes();
-        }
-    } else {
-        getPosterURLAndSizes();
-    }
-}
-
 
 function startSearch() {
 
@@ -218,16 +227,25 @@ function createPages(data, pageid) {
     }
     if (pageid == "#search-results") {
         message.innerHTML = `Total ${data.total_results} results found for ${searchString} <br> Page include 1 to ${data.results.length}`;
-    } else if (pageid == "#recommend-results") {
-        message.innerHTML = `Recommendation results are below`;
-    }
-    message.style.color = "red";
-    message.style.fontSize = "3rem";
-    Title.appendChild(message);
-    let documentFragment = new DocumentFragment();
-    documentFragment.appendChild(createCards(data.results));
+        message.style.color = "red";
+        message.style.fontSize = "2rem";
+        Title.appendChild(message);
+        let documentFragment = new DocumentFragment();
+        documentFragment.appendChild(createCards(data.results));
 
-    content.appendChild(documentFragment);
+        content.appendChild(documentFragment);
+
+    } else if (pageid == "#recommend-results") {
+        message.innerHTML = `Total ${data.total_results} results found for ${searchString} <br> 1 to ${data.results.length} Recommendation show below :`;
+        message.style.color = "red";
+        message.style.fontSize = "2rem";
+        Title.appendChild(message);
+        let documentFragment = new DocumentFragment();
+        documentFragment.appendChild(CreateRecommendationCard(data.results));
+
+        content.appendChild(documentFragment);
+
+    }
 
     let cardList = document.querySelectorAll(".content>div");
     cardList.forEach(function (item) {
@@ -255,7 +273,7 @@ function createCards(results) {
         review.textContent = movie.vote_average;
         overview.textContent = movie.overview;
 
-        image.src = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
+        image.src = `${imageURL}${imagesizes[2]}${movie.poster_path}`;
 
         movieCard.setAttribute("data-title", movie.title);
         movieCard.setAttribute("data-id", movie.id);
@@ -272,8 +290,53 @@ function createCards(results) {
 
         documentFragment.appendChild(movieCard);
         navigate(0);
-    });
 
+    });
+    return documentFragment;
+}
+
+function CreateRecommendationCard(results) {
+
+    let documentFragment = new DocumentFragment();
+
+    results.forEach(function (movie) {
+
+        let movieCard = document.createElement("div");
+        let section = document.createElement("section");
+        let image = document.createElement("img");
+        let Title = document.createElement("h3");
+        let release_date = document.createElement("h4");
+        let review = document.createElement("h5");
+        let overview = document.createElement("p");
+
+        Title.textContent = movie.original_title;
+        release_date.textContent = movie.release_date;
+        review.textContent = movie.vote_average;
+        overview.textContent = movie.overview;
+
+        image.src = `${imageURL}${imagesizes[2]}${movie.poster_path}`;
+
+        movieCard.setAttribute("data-title", movie.title);
+        movieCard.setAttribute("data-id", movie.id);
+
+        movieCard.className = "movieCard";
+        section.className = "imageSection";
+
+        section.appendChild(image);
+        movieCard.appendChild(section);
+        movieCard.appendChild(Title);
+        movieCard.appendChild(release_date);
+        movieCard.appendChild(review);
+        movieCard.appendChild(overview);
+
+        documentFragment.appendChild(movieCard);
+        navigate(1);
+        //        let alttext = document.querySelector("#search-results>.content>section>img");
+        //        let att = document.createAttribute("alt");
+        //        att.value = "Image not found";
+        //        alttext.setAttributeNode(att);
+
+    });
     return documentFragment;
 }
 
@@ -288,12 +351,9 @@ function getReccomendation() {
         .then((response) => response.json())
         .then(function (data) {
             console.log(data);
-
             createPages(data, "#recommend-results");
-
         })
         .catch((error) => alert(error));
-    navigate(1);
 }
 
 function calculateElapseTime(savedDate) {
@@ -303,12 +363,20 @@ function calculateElapseTime(savedDate) {
     let elapsedTime = now.getTime() - savedDate.getTime();
 
     let seconds = Math.ceil(elapsedTime / 1000);
-    console.log("Elapsed Time: " + seconds + " seconds");
+    console.log("Elapsed Time: " + seconds + "seconds");
     return seconds;
 }
 
 function PageBack() {
-    window.history.back;
+
+    if (navigate(1) == 'active') {
+        navigate(0).classList.add('active');
+        navigate(1).classList.remove('active');
+    } else if(navigate(0) == 'active')
+    {
+        navigate(0).classList.remove('active');
+        navigate(1).classList.remove('active');
+    }
 }
 let navigate = function (page) {
     for (let i = 0; i < pages.length; i++) {
