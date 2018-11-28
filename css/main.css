@@ -83,23 +83,26 @@ p {
     line-height: 1.5;
     color: red;
     background-color: rgb(200, 200, 200);
-    transition: "transform 1s";
 }
 
 .off {
     transform: translateY(-800px);
+    transition: transform 1s;
 }
 
 .on {
     transform: translateY(0);
+    transition: transform 1s;
 }
 
 .hide {
     display: none;
+    transition: display 1s;
 }
 
 .show {
     display: block;
+    transition: display 1s;
 }
 
 .page {
