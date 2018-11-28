@@ -87,7 +87,6 @@
 
     .off {
         transform: translateY(-800px);
-        transition: transform 1s;
     }
 
     .on {
