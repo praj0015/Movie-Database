@@ -55,6 +55,7 @@ let MyAPI_Project = (function () {
                     break;
                 }
             }
+            console.log(Showlist);
             let h1 = document.querySelector(".header");
             h1.innerHTML = Showlist + " Recommendation";
             modes = Showlist;
@@ -64,6 +65,7 @@ let MyAPI_Project = (function () {
             console.log(Showlist);
             hideoverlay(e);
         });
+
     }
 
     function showoverlay(e) {
@@ -140,8 +142,8 @@ let MyAPI_Project = (function () {
                 getPosterURLAndSizes();
             }
         } else {
-            saveDateToLocalStorage()
-            getPosterURLAndSizes();
+            saveDateToLocalStorage();
+            //   getPosterURLAndSizes();
         }
 
     }
