@@ -498,6 +498,7 @@ let MyAPI_Project = (function () {
         let url = `${movieDataBaseURL}movie/${movieID}/recommendations?api_key=${APIKEY}`;
         searchString = movieTitle;
         console.log(searchString);
+        document.querySelector("#search-input").value=searchString;
         fetch(url)
             .then((response) => response.json())
             .then(function (data) {
@@ -514,6 +515,7 @@ let MyAPI_Project = (function () {
         let url = `${movieDataBaseURL}tv/${TV_ID}/recommendations?api_key=${APIKEY}`;
         searchString = TVTitle;
         console.log(searchString);
+         document.querySelector("#search-input").value=searchString;
         fetch(url)
             .then((response) => response.json())
             .then(function (data) {
