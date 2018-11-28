@@ -44,11 +44,12 @@
 
     .content > div > h4 {
         grid-area: c;
+        font-family: sans-serif;
     }
 
     .content > div > h5 {
         grid-area: d;
-        font-family: 'Source+Sans+Pro'sans-serif;
+        font-family: 'Source+Sans+Pro' sans-serif;
     }
 
     p {

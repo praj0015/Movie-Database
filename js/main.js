@@ -57,6 +57,7 @@ let MyAPI_Project = (function () {
             }
             console.log(Showlist);
             let h1 = document.querySelector(".header");
+            h1.style.fontFamily="serif";
             h1.innerHTML = Showlist + " Recommendation";
             modes = Showlist;
             console.log(modes);
