@@ -534,7 +534,7 @@ let MyAPI_Project = (function () {
                     document.querySelector("#search-results").classList.remove("active");
                     let search = document.getElementById("search-input");
                     search.style.width = "800px";
-                    let main = document.querySelector("main");
+                     let main = document.querySelector("main");
                     main.style.transform = "translateY(0)";
                     main.style.transition = "transform 1s";
                     document.getElementById("search-input").value = "";
