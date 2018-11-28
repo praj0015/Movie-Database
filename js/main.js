@@ -473,6 +473,7 @@ let MyAPI_Project = (function () {
 
             section.appendChild(image);
             movieCard.appendChild(section);
+            image.setAttribute("alt", "Image not found");
             movieCard.appendChild(Title);
             movieCard.appendChild(release_date);
             movieCard.appendChild(review);
@@ -480,13 +481,6 @@ let MyAPI_Project = (function () {
 
             documentFragment.appendChild(movieCard);
             navigate(1);
-            //        let alttext = document.querySelector("#search-results>.content>section>img");
-            //        let att = document.createAttribute("alt");
-            //        att.value = "Image not found";
-            //        alttext.setAttributeNode(att);
-
-            image.setAttribute("alt", "Image not found");
-
         });
         return documentFragment;
     }
@@ -498,7 +492,7 @@ let MyAPI_Project = (function () {
         let url = `${movieDataBaseURL}movie/${movieID}/recommendations?api_key=${APIKEY}`;
         searchString = movieTitle;
         console.log(searchString);
-        document.querySelector("#search-input").value=searchString;
+        document.querySelector("#search-input").value = searchString;
         fetch(url)
             .then((response) => response.json())
             .then(function (data) {
@@ -515,7 +509,7 @@ let MyAPI_Project = (function () {
         let url = `${movieDataBaseURL}tv/${TV_ID}/recommendations?api_key=${APIKEY}`;
         searchString = TVTitle;
         console.log(searchString);
-         document.querySelector("#search-input").value=searchString;
+        document.querySelector("#search-input").value = searchString;
         fetch(url)
             .then((response) => response.json())
             .then(function (data) {
@@ -534,6 +528,7 @@ let MyAPI_Project = (function () {
                 if (cl == "recommend-results") {
                     active.classList.remove("active");
                     document.querySelector("#search-results").classList.add("active");
+
                 } else if (cl == "search-results") {
                     active.classList.remove("active");
                     document.querySelector("#search-results").classList.remove("active");
