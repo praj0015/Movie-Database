@@ -55,15 +55,14 @@ let MyAPI_Project = (function () {
                     break;
                 }
             }
-            console.log(Showlist);
-            let h1 = document.querySelector(".header");
-            h1.style.fontFamily="serif";
-            h1.innerHTML = Showlist + " Recommendation";
-            modes = Showlist;
-            console.log(modes);
             console.log("Saved mode in local Storage");
             localStorage.setItem(modeKey, JSON.stringify(Showlist));
             console.log(Showlist);
+            let h1 = document.querySelector(".header");
+            h1.style.fontFamily = "serif";
+            h1.innerHTML = Showlist + " Recommendation";
+            modes = Showlist;
+            console.log(modes);
             hideoverlay(e);
         });
 
