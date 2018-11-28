@@ -334,7 +334,7 @@ let MyAPI_Project = (function () {
             let review = document.createElement("h5");
             let overview = document.createElement("p");
 
-            Title.textContent = TV.title;
+            Title.textContent = TV.original_name;
             release_date.textContent = TV.release_date;
             review.textContent = TV.vote_average;
             overview.textContent = TV.overview;
@@ -417,7 +417,7 @@ let MyAPI_Project = (function () {
             let review = document.createElement("h5");
             let overview = document.createElement("p");
 
-            Title.textContent = TV.title;
+            Title.textContent = TV.original_name;
             release_date.textContent = TV.release_date;
             review.textContent = TV.vote_average;
             overview.textContent = TV.overview;
